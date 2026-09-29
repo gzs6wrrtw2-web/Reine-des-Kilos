@@ -1,0 +1,9 @@
+{
+  "name": "La Reine des Kilos — 16 bits",
+  "short_name": "Reine des Kilos",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#090b18",
+  "theme_color": "#10162c",
+  "lang": "fr"
+}
