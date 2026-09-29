@@ -21,7 +21,7 @@
 </head>
 <body>
 <div id="wrap"><canvas id="game" width="640" height="960"></canvas></div>
-<div id="touch">
+<div id="touch" style="touch-action:none">
   <div class="pad">
     <div class="cluster">
       <button class="up">▲</button><button class="left">◀</button><button class="down">▼</button><button class="right">▶</button>
@@ -271,7 +271,20 @@ function bindTouch(id,key){
   ["touchend","mouseup","mouseleave"].forEach(ev=>b.addEventListener(ev,e=>{e.preventDefault();keys[key]=false}));
 }
 bindTouch("atk"," ");bindTouch("dash","shift");
-bindTouch("up","arrowup");bindTouch("down","arrowdown");bindTouch("left","arrowleft");bindTouch("right","arrowright");
+function bindMove(selector,key){
+  const b=document.querySelector(selector);
+  if(!b)return;
+  const start=e=>{e.preventDefault();keys[key]=true};
+  const end=e=>{e.preventDefault();keys[key]=false};
+  b.addEventListener("pointerdown",start,{passive:false});
+  b.addEventListener("pointerup",end,{passive:false});
+  b.addEventListener("pointercancel",end,{passive:false});
+  b.addEventListener("pointerleave",end,{passive:false});
+}
+bindMove(".up","arrowup");
+bindMove(".down","arrowdown");
+bindMove(".left","arrowleft");
+bindMove(".right","arrowright");
 loop();
 </script>
 </body>
